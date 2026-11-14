@@ -1,0 +1,4 @@
+dist/
+art-source/
+.DS_Store
+node_modules/

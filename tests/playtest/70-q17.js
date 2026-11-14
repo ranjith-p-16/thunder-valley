@@ -1,0 +1,11 @@
+import { createSim } from '../../src/sim/sim.js';
+import { QUESTS } from '../../src/data/story.js';
+const sim = createSim(), s = sim.state;
+sim.posse.join('mara', true);
+s.story.quest = 16; s.story.step = 2; s.story.flags.rex = 'killed'; sim.story.enter();
+console.log('step', s.story.step, QUESTS[16].steps[s.story.step].type);
+s.rex.dead = true; s.story.flags.rexdead = true;
+sim.step();
+console.log('after rex dead: step', s.story.step, QUESTS[16].steps[s.story.step]?.type, QUESTS[16].steps[s.story.step]?.dialogue, 'status', JSON.stringify(sim.story.status()));
+sim.command({ type: 'talk' });
+console.log('dialogue', s.dialogue, 'canTalk', sim.story.canTalk());
